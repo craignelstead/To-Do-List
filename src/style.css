@@ -1,6 +1,45 @@
-.container-fluid {
-    padding-left: 0;
-    padding-right: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+:root {
+    --charcoal: #2F4858;
+    --darkblue: #33658A;
+    --ashgray: #9DB5B2;
+    --raspberry: #D81E5B;
+    --orange: #F17300;
+    /* Color palette:
+        https://coolors.co/2f4858-33658a-9db5b2-d81e5b-f17300
+    */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#allContainer {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    height: 100vh;
+    width: 100%;
+}
+
+#sidebar {
+    background-color: var(--charcoal);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ------------------------------------------------- */
+
+#contentContainer {
+
+}
+
+#topNav {
+    background-color: ;
+    display: flex;
+}
+
+/* ------------------------------------------------- */
+
+#content {
+
 }
