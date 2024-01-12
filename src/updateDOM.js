@@ -61,14 +61,17 @@ export const newProject = (function(doc) {
 
         //Form body
         const newProjectForm = doc.createElement('form');
+        newProjectForm.setAttribute('id', 'formBody');
+        newProjectForm.setAttribute('action', '');
+        newProjectForm.setAttribute('method', 'post');
 
         const formBody = doc.createElement('div');
-        formBody.setAttribute('id', 'formBody');
 
             //Project Name
         const newProjectNameLabel = doc.createElement('label');
         newProjectNameLabel.setAttribute('for', 'projectname');
         newProjectNameLabel.textContent = 'Project name';
+
         const newProjectNameText = doc.createElement('input');
         newProjectNameText.setAttribute('type', 'text');
         newProjectNameText.setAttribute('name', 'projectname');
@@ -76,10 +79,12 @@ export const newProject = (function(doc) {
         newProjectNameText.setAttribute('minlength', '1');
         newProjectNameText.setAttribute('minlength', '20');
         newProjectNameText.required = true;
+
         const newProjectNameMsg = doc.createElement('p');
         newProjectNameMsg.textContent = 'Must have a name';
         newProjectNameMsg.classList.add('formMessage');
-        //newProjectNameMsg.classList.add('hidden');
+        newProjectNameMsg.classList.add('hidden');
+
         formBody.appendChild(newProjectNameLabel);
         formBody.appendChild(newProjectNameText);
         formBody.appendChild(newProjectNameMsg);
@@ -88,26 +93,39 @@ export const newProject = (function(doc) {
         const newProjectDescLabel = doc.createElement('label');
         newProjectDescLabel.setAttribute('for', 'projectdesc');
         newProjectDescLabel.textContent = 'Description';
+
         const newProjectDescText = doc.createElement('textarea');
         newProjectDescText.setAttribute('name', 'projectdesc');
         newProjectDescText.setAttribute('id', 'projectdesc');
         newProjectDescText.setAttribute('rows', '4');
         newProjectDescText.setAttribute('cols', '50');
+
         formBody.appendChild(newProjectDescLabel);
         formBody.appendChild(newProjectDescText);
-
         newProjectForm.appendChild(formBody);
 
         //Form footer
         const formFooter = doc.createElement('div');
         formFooter.setAttribute('id', 'formFooter');
 
+        const newProjectCancel = doc.createElement('button');
+        newProjectCancel.textContent = 'Cancel';
+        newProjectCancel.classList.add('formCancel');
+        newProjectCancel.addEventListener('click', hideForm);
+
+        const newProjectSubmit = doc.createElement('button');
+        newProjectSubmit.textContent = 'Submit';
+        newProjectSubmit.classList.add('formSubmit');
+
+        formFooter.appendChild(newProjectCancel);
+        formFooter.appendChild(newProjectSubmit);
+
         newProjectForm.appendChild(formFooter);
 
         //Append form and form container to main container
         formContainer.appendChild(newProjectForm);
 
-        formContainer.classList.toggle('fade-in');
+        // formContainer.classList.toggle('fade-in');
         container.appendChild(formContainer);
     }
 
