@@ -33,7 +33,7 @@ a {
 }
 
 #sidebar {
-    background-color: var(--charcoal);
+    background-color: var(--darkblue);
     display: flex;
     flex-direction: column;
     color: white;
@@ -66,16 +66,19 @@ a {
     grid-area: message;
 }
 
-#sidebar ul {
-    
-}
-
 .sideItems>li {
     display: flex;
-    padding: 5px 0;
+    padding: 5px;
     gap: 10px;
     align-items: center;
     font-size: 1.3rem;
+    border-radius: 5px;
+}
+
+.sideItems>li:hover {
+    background-color: var(--charcoal);
+    transition: 0.1s;
+    cursor: pointer;
 }
 
 #newProjectSideBar {
@@ -84,6 +87,10 @@ a {
 
 #newProjectSideBar>img {
     filter: invert(70%) sepia(6%) saturate(619%) hue-rotate(123deg) brightness(99%) contrast(93%);
+}
+
+#newProjectSideBar:hover {
+    color: white;
 }
 
 .sideItems img {
@@ -158,5 +165,120 @@ a {
 /* ------------------------------------------------- */
 
 #content {
-    background-color: var(--darkblue);
+    background-color: white;
+}
+
+/* -----------------New Project Form---------------- */
+
+#blurBG {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 90;
+    backdrop-filter: blur(2px);
+}
+
+#formContainer {
+    position: absolute;
+    z-index: 91;
+    width: 15%;
+    padding: 5px;
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-areas: 
+        'header'
+        'body'
+        'footer';
+    top: 20%;
+    justify-self: center;
+    margin: 0;
+}
+
+#formHeader {
+    display: flex;
+    justify-content: space-between;
+    grid-area: header;
+}
+
+#formHeader>h2 {
+    padding: 0;
+    margin: 0;
+}
+
+#formHeader>img {
+    width: 20px;
+    height: 20px;
+}
+
+#formHeader>img:hover {
+    cursor: pointer;
+}
+
+#formBody {
+    grid-area: body;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#formBody>div {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1.2rem;
+}
+
+.formTextbox {
+
+}
+
+.formTextArea {
+
+}
+
+.formMessage {
+    font-size: 0.8rem;
+    height: 1rem;
+    color: red;
+    margin: 0 0 5px;
+}
+
+.formValid {
+    border-color: green;
+}
+
+.formInvalid {
+    border-color: red;
+}
+
+.formCancel {
+
+}
+
+.formSubmit {
+
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+/* .fade-in {
+    opacity: 1;
+    transition: opacity 0.9s ease;
+} */
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#formFooter {
+    grid-area: footer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
 }

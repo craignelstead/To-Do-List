@@ -1,3 +1,18 @@
 import './style.css';
 
-console.log('Hello there!');
+import { newProject } from './updateDOM';
+import { listeners } from './updateDOM';
+import { Project } from './newProject';
+import { ToDoItem } from './newToDo';
+
+//Description
+export const projects = (function() {
+
+    //Initiate empty array of projects
+    let myProjects = [];
+
+    return {
+        myProjects,
+    }
+
+})();
