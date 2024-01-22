@@ -134,7 +134,6 @@ a {
 }
 
 #topNav {
-    background-color: var(--ashgray);
     display: flex;
 }
 
@@ -154,12 +153,22 @@ a {
     position: absolute;
 }
 
+#iconsearch:hover {
+    cursor: pointer;
+}
+
 #searchbox {
-    height: 30px;
+    height: 40px;
+    font-size: 1.2rem;
     border-radius: 15px;
-    background-color: var(--ashgray);
     border: none;
     flex-grow: 1;
+    padding-left: 40px;
+    margin: 2px;
+}
+
+#searchbox:active {
+    border: var(--ashgray);
 }
 
 /* ------------------------------------------------- */

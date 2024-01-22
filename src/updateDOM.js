@@ -1,5 +1,7 @@
 //Updates DOM for content
 
+import { Project } from './newProject';
+
 //New Project Form
 export const newProject = (function(doc) {
     //Creates blur, creates form
@@ -63,7 +65,7 @@ export const newProject = (function(doc) {
         const newProjectForm = doc.createElement('form');
         newProjectForm.setAttribute('id', 'formBody');
         newProjectForm.setAttribute('action', '');
-        newProjectForm.setAttribute('method', 'post');
+        //newProjectForm.setAttribute('method', 'post');
 
         const formBody = doc.createElement('div');
 
@@ -77,7 +79,7 @@ export const newProject = (function(doc) {
         newProjectNameText.setAttribute('name', 'projectname');
         newProjectNameText.setAttribute('id', 'projectname');
         newProjectNameText.setAttribute('minlength', '1');
-        newProjectNameText.setAttribute('minlength', '20');
+        newProjectNameText.setAttribute('maxlength', '20');
         newProjectNameText.required = true;
 
         const newProjectNameMsg = doc.createElement('p');
@@ -119,6 +121,14 @@ export const newProject = (function(doc) {
 
         formFooter.appendChild(newProjectCancel);
         formFooter.appendChild(newProjectSubmit);
+
+            //Add event listener to submit button
+        newProjectSubmit.addEventListener('click', function(event){
+            event.preventDefault();
+            let newEvent = Project(newProjectNameText.value, 
+                newProjectDescText.value, '0', 'In progress', 'Time');
+            alert(newEvent.title);
+        });
 
         newProjectForm.appendChild(formFooter);
 
