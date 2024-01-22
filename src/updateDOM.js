@@ -1,6 +1,6 @@
 //Updates DOM for content
 
-import { Project } from './newProject';
+import { validate } from './validateInput';
 
 //New Project Form
 export const newProject = (function(doc) {
@@ -125,9 +125,8 @@ export const newProject = (function(doc) {
             //Add event listener to submit button
         newProjectSubmit.addEventListener('click', function(event){
             event.preventDefault();
-            let newEvent = Project(newProjectNameText.value, 
-                newProjectDescText.value, '0', 'In progress', 'Time');
-            alert(newEvent.title);
+            validate.projectForm(newProjectNameText.value, 
+                newProjectDescText.value);
         });
 
         newProjectForm.appendChild(formFooter);
@@ -139,9 +138,14 @@ export const newProject = (function(doc) {
         container.appendChild(formContainer);
     }
 
+    function invalidInput() {
+        alert('Squawk');
+    }
+
     return {
         showForm,
         hideForm,
+        invalidInput,
     }
 })(document);
 
