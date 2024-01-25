@@ -1,7 +1,6 @@
 //Project Creator
 
 import { validate } from './validateInput';
-import { formatDistance, subDays } from "date-fns";
 
 export const Project = (title, description, toDoItems, projectStatus, timeCreated) => {
 
@@ -10,6 +9,8 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
     toDoItems = toDoItems;
     projectStatus = projectStatus;
     timeCreated = timeCreated;
+
+
 
     return {
         title,

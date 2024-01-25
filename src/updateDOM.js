@@ -10,7 +10,7 @@ export const newProject = (function(doc) {
         buildForm();
     }
 
-    //Removes blue, hides form
+    //Removes blur, hides form
     function hideForm() {
         noBlur();
 
@@ -83,9 +83,10 @@ export const newProject = (function(doc) {
         newProjectNameText.required = true;
 
         const newProjectNameMsg = doc.createElement('p');
-        newProjectNameMsg.textContent = 'Must have a name';
+        // newProjectNameMsg.textContent = 'Project must have a name';
         newProjectNameMsg.classList.add('formMessage');
         newProjectNameMsg.classList.add('hidden');
+        newProjectNameMsg.setAttribute('id', 'nameMsg');
 
         formBody.appendChild(newProjectNameLabel);
         formBody.appendChild(newProjectNameText);
@@ -138,8 +139,12 @@ export const newProject = (function(doc) {
         container.appendChild(formContainer);
     }
 
-    function invalidInput() {
-        alert('Squawk');
+    function invalidInput(msg) {
+        const textbox = doc.getElementById('projectname');
+        const label = doc.getElementById('nameMsg');
+        label.textContent = msg;
+        textbox.classList.add('formInvalid');
+        label.classList.remove('hidden');
     }
 
     return {
@@ -153,4 +158,32 @@ export const newProject = (function(doc) {
 export const listeners = (function(doc) {
     const newProjectBtn = doc.getElementById('newProjectSideBar');
     newProjectBtn.addEventListener('click', newProject.showForm);
+})(document);
+
+//Updates sidebar
+export const updateSidebar = (function(doc) {
+
+    //Add new project to sidebar
+    function addNewProject(proj) {
+        const projLists = doc.getElementById('projectListUl');
+
+        const li = doc.createElement('li');
+        const img = doc.createElement('img');
+        const span = doc.createElement('span');
+
+        img.setAttribute('src', './images/project.svg');
+        img.setAttribute('alt', 'Project');
+        
+        span.textContent = proj.title;
+        li.appendChild(img);
+        li.appendChild(span);
+
+        projLists.appendChild(li);
+
+        //projLists.addEventListener('click',);
+    }
+
+    return {
+        addNewProject,
+    }
 })(document);

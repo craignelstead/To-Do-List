@@ -27,7 +27,7 @@ a {
 
 #allContainer {
     display: grid;
-    grid-template-columns: minmax(250px, 1fr) 6fr;
+    grid-template-columns: minmax(275px, 1fr) 6fr;
     height: 100vh;
     width: 100%;
 }
