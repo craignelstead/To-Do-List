@@ -12,16 +12,7 @@ export const validate = (function() {
     //Checks if the project form input is valid
     function projectForm(name, description) {
         if ((name.length > 0) && (name.length <=20)) {
-            //Check if project title already exists
-            // projects.myProjects.forEach((proj) => {
-            //     if (proj.title == name) {
-            //         alert(proj.title + name);
-            //         invalid();
-            //         return;
-            //     }
-            // });
             isTitleTaken(name) ? invalid('Project already exists') : valid(name, description);
-            //valid(name, description);
         }
         else {
             invalid('Project must have a name');

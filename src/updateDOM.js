@@ -1,6 +1,7 @@
 //Updates DOM for content
 
 import { validate } from './validateInput';
+import { projects } from './index';
 
 //New Project Form
 export const newProject = (function(doc) {
@@ -156,8 +157,21 @@ export const newProject = (function(doc) {
 
 //Event listeners
 export const listeners = (function(doc) {
+        const todoToday = doc.getElementById('todoToday');
+    //todoToday.addEventListener('click',);
+
+    const todoThisWeek = doc.getElementById('todoThisWeek');
+    //todoThisWeek.addEventListener('click',);
+
+    const allProjects = doc.getElementById('allProjects');
+    // addProjects.addEventListener('click',);
+
     const newProjectBtn = doc.getElementById('newProjectSideBar');
     newProjectBtn.addEventListener('click', newProject.showForm);
+
+    const allTodos = doc.getElementById('allTodos');
+    // allTodos.addEventListener('click',);
+
 })(document);
 
 //Updates sidebar
@@ -180,10 +194,49 @@ export const updateSidebar = (function(doc) {
 
         projLists.appendChild(li);
 
-        //projLists.addEventListener('click',);
+        li.addEventListener('click', show.showOneProject);
     }
 
     return {
         addNewProject,
     }
+})(document);
+
+//Clears work space
+export const clearWorkSpace = (function(doc) {
+    function clearAll() {
+        const content = doc.getElementById('content');
+        while (content.firstChild) {
+            content.removeChild(content.firstChild);
+        }
+    }
+
+    return {
+        clearAll,
+    }
+})(document);
+
+//Show all projects or one project
+export const show = (function(doc) {
+
+    //Show list of all projects
+    function showAllProjects() {
+        clearWorkSpace.clearAll();
+
+
+    }
+
+    function showOneProject() {
+        clearWorkSpace.clearAll();
+
+        alert(this.lastChild.textContent);
+
+        projects.myProjects
+    }
+
+    return {
+        showAllProjects,
+        showOneProject,
+    }
+
 })(document);
