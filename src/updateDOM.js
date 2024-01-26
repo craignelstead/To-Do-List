@@ -155,25 +155,6 @@ export const newProject = (function(doc) {
     }
 })(document);
 
-//Event listeners
-export const listeners = (function(doc) {
-        const todoToday = doc.getElementById('todoToday');
-    //todoToday.addEventListener('click',);
-
-    const todoThisWeek = doc.getElementById('todoThisWeek');
-    //todoThisWeek.addEventListener('click',);
-
-    const allProjects = doc.getElementById('allProjects');
-    // addProjects.addEventListener('click',);
-
-    const newProjectBtn = doc.getElementById('newProjectSideBar');
-    newProjectBtn.addEventListener('click', newProject.showForm);
-
-    const allTodos = doc.getElementById('allTodos');
-    // allTodos.addEventListener('click',);
-
-})(document);
-
 //Updates sidebar
 export const updateSidebar = (function(doc) {
 
@@ -204,12 +185,15 @@ export const updateSidebar = (function(doc) {
 
 //Clears work space
 export const clearWorkSpace = (function(doc) {
+    //Remove all child elements from content div
     function clearAll() {
         const content = doc.getElementById('content');
         while (content.firstChild) {
             content.removeChild(content.firstChild);
         }
     }
+
+    //Change grid layout of content for displaying all projects
 
     return {
         clearAll,
@@ -223,20 +207,87 @@ export const show = (function(doc) {
     function showAllProjects() {
         clearWorkSpace.clearAll();
 
+        const content = doc.getElementById('content');
+        const allProjectsSpace = doc.createElement('div');
+        allProjectsSpace.setAttribute('id', 'allProjectsSpace');
 
+        //Display each project
+        projects.myProjects.forEach((proj) => {
+            const projContainer = doc.createElement('div');
+            projContainer.classList.add('allProjectsContainers');
+
+            //Card header
+            const projHeader = doc.createElement('div');
+            projHeader.classList.add('allProjectsContainersHeader');
+
+            const h2 = doc.createElement('h2');
+            h2.textContent = proj.title;
+
+            const menuButton = doc.createElement('img');
+            menuButton.setAttribute('src', './images/dotmenu.svg');
+            menuButton.classList.add('projMenuBtn');
+            menuButton.addEventListener('click', function() {
+                //This function opens the menu when clicked
+                //alert(proj.title);
+            });
+
+            projHeader.append(h2, menuButton);
+            projContainer.appendChild(projHeader);
+
+            //Card body
+            const projBody = doc.createElement('div');
+            const description = doc.createElement('p');
+            description.textContent = proj.hideLongDescription(proj.description);
+
+            const numOfTodos = doc.createElement('p');
+            numOfTodos.textContent = `To Dos: ${proj.toDoItems.length}`;
+
+            projBody.append(description, numOfTodos);
+
+            projContainer.appendChild(projBody);
+
+            //Add to page
+            allProjectsSpace.appendChild(projContainer);
+            projContainer.addEventListener('click', show.showOneProject);
+        })
+
+        content.appendChild(allProjectsSpace);
     }
 
+    //Show selected project
     function showOneProject() {
         clearWorkSpace.clearAll();
 
-        alert(this.lastChild.textContent);
+        //Get project info
+        const currentProject = projects.matchProject(this.lastChild.textContent);
 
-        projects.myProjects
+        const content = doc.getElementById('content');
+
+        const oneProjectContainer = doc.createElement('div');
     }
 
     return {
         showAllProjects,
         showOneProject,
     }
+
+})(document);
+
+//Event listeners
+export const listeners = (function(doc) {
+    const todoToday = doc.getElementById('todoToday');
+    //todoToday.addEventListener('click',);
+
+    const todoThisWeek = doc.getElementById('todoThisWeek');
+    //todoThisWeek.addEventListener('click',);
+
+    const allProjects = doc.getElementById('allProjects');
+    allProjects.addEventListener('click', show.showAllProjects);
+
+    const newProjectBtn = doc.getElementById('newProjectSideBar');
+    newProjectBtn.addEventListener('click', newProject.showForm);
+
+    const allTodos = doc.getElementById('allTodos');
+    // allTodos.addEventListener('click',);
 
 })(document);

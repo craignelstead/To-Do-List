@@ -77,7 +77,6 @@ a {
 
 .sideItems>li:hover {
     background-color: var(--charcoal);
-    transition: 0.1s;
     cursor: pointer;
 }
 
@@ -171,10 +170,67 @@ a {
     border: var(--ashgray);
 }
 
-/* ------------------------------------------------- */
+/* ------------Content Work Area------------- */
 
 #content {
     background-color: white;
+}
+
+#allProjectsSpace {
+    display: grid;
+    gap: 30px;
+    padding: 15px;
+    grid-template-rows: repeat(auto-fit, 200px);
+    grid-template-columns: repeat(auto-fit, 300px);
+}
+
+.allProjectsContainers {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    gap: 10px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid var(--ashgray);
+    overflow: auto;
+    height: 200px;
+    width: 300px;
+}
+
+.allProjectsContainers:hover {
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.allProjectsContainers>p, .allProjectsContainers>h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.allProjectsContainersHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.projMenuBtn {
+    height: 25px;
+    width: 25px;
+    border-radius: 12.5px;
+    padding: 3px;
+}
+
+.projMenuBtn:hover {
+    background-color: var(--ashgray);
+    transition: 0.2s;
+}
+
+#oneProjectSpace {
+    
+}
+
+.oneProjectContainers {
+    display: grid;
 }
 
 /* -----------------New Project Form---------------- */
@@ -190,10 +246,10 @@ a {
 #formContainer {
     position: absolute;
     z-index: 91;
-    width: 15%;
-    padding: 5px;
+    /* width: 15%; */
+    padding: 15px;
     display: grid;
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 3fr;
     grid-template-areas: 
         'header'
         'body'
@@ -201,6 +257,10 @@ a {
     top: 20%;
     justify-self: center;
     margin: 0;
+    background-color: white;
+    border: 1px solid var(--charcoal);
+    border-radius: 15px;
+    filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.3));
 }
 
 #formHeader {

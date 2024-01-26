@@ -10,7 +10,15 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
     projectStatus = projectStatus;
     timeCreated = timeCreated;
 
-
+    //Shortens description if longer than 100 characters
+    function hideLongDescription(desc) {
+        if (desc.length <110) {
+            return desc;
+        }
+        else {
+            return desc.slice(0,107) + '...';
+        }
+    }
 
     return {
         title,
@@ -18,5 +26,6 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         toDoItems,
         projectStatus,
         timeCreated,
+        hideLongDescription,
     }
 }

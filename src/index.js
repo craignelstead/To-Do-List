@@ -9,14 +9,19 @@ import { validate } from './validateInput';
 //date-fns
 import { formatDistance, subDays } from "date-fns";
 
-//Array to store all projects
+//Projects
 export const projects = (function() {
 
     //Initiate empty array of projects
     let myProjects = [];
 
-    function matchProject(proj) {
-
+    //Finds project from title
+    function matchProject(projTitle) {
+        for (let i=0; i<myProjects.length; i++) {
+            if (myProjects[i].title === projTitle) {
+                return myProjects[i];
+            }
+        }
     }
 
     return {
