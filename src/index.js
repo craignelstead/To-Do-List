@@ -16,17 +16,17 @@ export const projects = (function() {
     let myProjects = [];
 
     //Finds project from title
-    function matchProject(projTitle) {
-        for (let i=0; i<myProjects.length; i++) {
-            if (myProjects[i].title === projTitle) {
-                return myProjects[i];
-            }
-        }
-    }
+    // function matchProject(projTitle) {
+    //     for (let i=0; i<myProjects.length; i++) {
+    //         if (myProjects[i].title === projTitle) {
+    //             return myProjects[i];
+    //         }
+    //     }
+    // }
 
     return {
         myProjects,
-        matchProject,
+        //matchProject,
     }
 
 })();

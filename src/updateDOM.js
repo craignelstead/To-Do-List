@@ -175,7 +175,9 @@ export const updateSidebar = (function(doc) {
 
         projLists.appendChild(li);
 
-        li.addEventListener('click', show.showOneProject);
+        li.addEventListener('click', function() {
+            show.showOneProject(proj);
+        });
     }
 
     return {
@@ -248,22 +250,26 @@ export const show = (function(doc) {
 
             //Add to page
             allProjectsSpace.appendChild(projContainer);
-            projContainer.addEventListener('click', show.showOneProject);
+            projContainer.addEventListener('click', function() {
+                show.showOneProject(proj);
+            });
         })
 
         content.appendChild(allProjectsSpace);
     }
 
     //Show selected project
-    function showOneProject() {
+    function showOneProject(proj) {
         clearWorkSpace.clearAll();
 
         //Get project info
-        const currentProject = projects.matchProject(this.lastChild.textContent);
+        //const currentProject = projects.matchProject(this.lastChild.textContent);
 
         const content = doc.getElementById('content');
 
         const oneProjectContainer = doc.createElement('div');
+        
+        alert(proj.description);
     }
 
     return {
