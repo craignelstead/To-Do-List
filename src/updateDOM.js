@@ -166,10 +166,11 @@ export const newToDo = (function(doc) {
         buildForm(proj);
     }
 
+    //Hide form
     function hideForm() {
         newProject.noBlur();
 
-        const newToDoFormDiv = doc.getElementById('toDoFormDiv');
+        const newToDoFormDiv = doc.getElementById('formContainer');
         newToDoFormDiv.classList.toggle('fade-out');
         setTimeout(function() {
             newToDoFormDiv.remove();
@@ -182,12 +183,40 @@ export const newToDo = (function(doc) {
 
         const newToDoFormDiv = doc.createElement('div');
         newToDoFormDiv.setAttribute('id', 'formContainer');
+        
+        //Header
+        const formHeader = doc.createElement('div');
+        const formHeaderTitle = doc.createElement('h2');
+        const formHeaderCancel = doc.createElement('img');
+
+        formHeader.setAttribute('id', 'formHeader');
+        formHeaderTitle.textContent = 'New Task';
+        formHeaderCancel.setAttribute('src', './images/close.svg');
+
+        formHeaderCancel.addEventListener('click', hideForm);
+
+        formHeader.appendChild(formHeaderTitle);
+        formHeader.appendChild(formHeaderCancel);
+
+        newToDoFormDiv.appendChild(formHeader);
+
+        //Body
+
+        //Footer
+
+        //Button that validates input
 
         container.appendChild(newToDoFormDiv);
     }
 
+    //Show error message when no title is given
+    function invalid() {
+
+    }
+
     return {
         showForm,
+        invalid,
     }
 
 })(document);

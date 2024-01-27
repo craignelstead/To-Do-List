@@ -6,6 +6,7 @@ import { projects } from './index';
 
 import { formatDistance, subDays } from "date-fns";
 import { forEach } from 'neo-async';
+import { ToDoItem } from './newToDo';
 
 export const validate = (function() {
 
@@ -25,6 +26,19 @@ export const validate = (function() {
             if (projects.myProjects[i].title == name) {
                 return true
             }
+        }
+    }
+
+    //See if todo input is valid
+    function todoForm(title, project, description, dueDate, priority, notes,
+        checklist, itemStatus, timeCreated) {
+        if (title.length > 0) {
+            let taskCreated = ToDoItem(title, project, description, dueDate, 
+                priority, notes, checklist, itemStatus, timeCreated);
+            project.addToDo(taskCreated);
+        }
+        else {
+            
         }
     }
 
@@ -48,5 +62,6 @@ export const validate = (function() {
 
     return {
         projectForm,
+        todoForm,
     }
 })();

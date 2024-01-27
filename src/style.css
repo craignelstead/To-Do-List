@@ -336,14 +336,6 @@ label {
     font-size: 1.2rem;
 }
 
-.formTextbox {
-
-}
-
-.formTextArea {
-
-}
-
 .formMessage {
     font-size: 0.8rem;
     height: 1rem;
@@ -371,11 +363,6 @@ label {
     visibility: hidden;
 }
 
-/* .fade-in {
-    opacity: 1;
-    transition: opacity 0.9s ease;
-} */
-
 .fade-out {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -387,4 +374,9 @@ label {
     justify-content: flex-end;
     align-items: flex-end;
     gap: 10px;
+}
+
+/* -----------------New To Do Form---------------- */
+#newToDoFormDiv {
+    
 }
