@@ -2,15 +2,13 @@
 
 import { newToDo } from "./updateDOM";
 
-export const ToDoItem = (title, project, description, dueDate, priority, notes, 
+export const ToDoItem = (title, project, dueDate, priority,  
 checklist, itemStatus, timeCreated) => {
 
     title = title;
     project = project;
-    description = description;
     dueDate = dueDate;
     priority = priority;
-    notes = notes;
     checklist = checklist;
     itemStatus = itemStatus;
     timeCreated = timeCreated;
@@ -18,10 +16,8 @@ checklist, itemStatus, timeCreated) => {
     return {
         title,
         project,
-        description,
         dueDate,
         priority,
-        notes,
         checklist,
         itemStatus,
         timeCreated,

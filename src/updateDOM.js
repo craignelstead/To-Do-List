@@ -201,10 +201,37 @@ export const newToDo = (function(doc) {
         newToDoFormDiv.appendChild(formHeader);
 
         //Body
+        const form = doc.createElement('form');
+
+        const body = doc.createElement('div');
+        body.setAttribute('id', 'formBody');
+
+            //Task Name
+        const title = doc.createElement('input');
+        title.setAttribute('type', 'text');
+        title.setAttribute('name', 'taskname');
+        title.setAttribute('id', 'taskname');
+        title.setAttribute('minlength', '1');
+        title.setAttribute('maxlength', '20');
+        title.setAttribute('placeholder', 'Task name');
+        title.required = true;
+
+        const titleMsg = doc.createElement('p');
+        titleMsg.textContent = 'Task must have a name';
+        titleMsg.classList.add('formMessage');
+        //titleMsg.classList.add('hidden');
+        titleMsg.setAttribute('id', 'nameMsg');
+
+        form.appendChild(title);
+        form.appendChild(titleMsg);
 
         //Footer
+        const footer = doc.createElement('div');
+
 
         //Button that validates input
+        form.append(body, footer);
+        newToDoFormDiv.appendChild(form);
 
         container.appendChild(newToDoFormDiv);
     }

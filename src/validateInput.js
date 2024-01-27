@@ -1,6 +1,6 @@
 //Validates input for new project
 
-import { newProject, updateSidebar } from './updateDOM';
+import { newProject, updateSidebar, newToDo } from './updateDOM';
 import { Project } from './newProject';
 import { projects } from './index';
 
@@ -30,15 +30,15 @@ export const validate = (function() {
     }
 
     //See if todo input is valid
-    function todoForm(title, project, description, dueDate, priority, notes,
+    function todoForm(title, project, dueDate, priority,
         checklist, itemStatus, timeCreated) {
         if (title.length > 0) {
-            let taskCreated = ToDoItem(title, project, description, dueDate, 
-                priority, notes, checklist, itemStatus, timeCreated);
+            let taskCreated = ToDoItem(title, project, dueDate, 
+                priority, checklist, itemStatus, timeCreated);
             project.addToDo(taskCreated);
         }
         else {
-            
+            newToDo.invalid();
         }
     }
 
