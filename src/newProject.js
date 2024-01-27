@@ -20,6 +20,10 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         }
     }
 
+    function addTodo(item) {
+        toDoItems.push(item)
+    }
+
     return {
         title,
         description,
@@ -27,5 +31,6 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         projectStatus,
         timeCreated,
         hideLongDescription,
+        addTodo,
     }
 }

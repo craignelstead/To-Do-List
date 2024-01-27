@@ -1,4 +1,7 @@
 //To Do Creator
+
+import { newToDo } from "./updateDOM";
+
 export const ToDoItem = (title, project, description, dueDate, priority, notes, 
 checklist, itemStatus, timeCreated) => {
 

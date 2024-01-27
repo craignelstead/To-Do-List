@@ -2,6 +2,7 @@
 
 import { validate } from './validateInput';
 import { projects } from './index';
+import { ToDoItem } from './newToDo';
 
 //New Project Form
 export const newProject = (function(doc) {
@@ -38,13 +39,13 @@ export const newProject = (function(doc) {
         blurryBackDrop.remove();
     }
 
-    //Create new roject form
+    //Create new project form
     function buildForm() {
         const container = doc.getElementById('allContainer');
 
-        //Form container and form
-        const formContainer = doc.createElement('div');
-        formContainer.setAttribute('id', 'formContainer');
+         //Form container and form
+         const formContainer = doc.createElement('div');
+         formContainer.setAttribute('id', 'formContainer');
 
         //Form header
         const formHeader = doc.createElement('div');
@@ -152,7 +153,43 @@ export const newProject = (function(doc) {
         showForm,
         hideForm,
         invalidInput,
+        createBlur,
+        noBlur,
     }
+})(document);
+
+//New to do form
+export const newToDo = (function(doc) {
+    //Show form
+    function showForm(proj) {
+        newProject.createBlur();
+        buildForm(proj);
+    }
+
+    function hideForm() {
+        newProject.noBlur();
+
+        const newToDoFormDiv = doc.getElementById('toDoFormDiv');
+        newToDoFormDiv.classList.toggle('fade-out');
+        setTimeout(function() {
+            newToDoFormDiv.remove();
+        }, 300);
+    }
+
+    //Build form
+    function buildForm(proj) {
+        const container = doc.getElementById('allContainer');
+
+        const newToDoFormDiv = doc.createElement('div');
+        newToDoFormDiv.setAttribute('id', 'formContainer');
+
+        container.appendChild(newToDoFormDiv);
+    }
+
+    return {
+        showForm,
+    }
+
 })(document);
 
 //Updates sidebar
@@ -230,7 +267,6 @@ export const show = (function(doc) {
             menuButton.classList.add('projMenuBtn');
             menuButton.addEventListener('click', function() {
                 //This function opens the menu when clicked
-                //alert(proj.title);
             });
 
             projHeader.append(h2, menuButton);
@@ -262,19 +298,80 @@ export const show = (function(doc) {
     function showOneProject(proj) {
         clearWorkSpace.clearAll();
 
-        //Get project info
-        //const currentProject = projects.matchProject(this.lastChild.textContent);
-
         const content = doc.getElementById('content');
+        const oneProjectSpace = doc.createElement('div');
+        oneProjectSpace.classList.add('oneProjectSpace');
 
-        const oneProjectContainer = doc.createElement('div');
-        
-        alert(proj.description);
+        const oneProjCard = doc.createElement('div');
+        oneProjCard.classList.add('oneProjectCard');
+        oneProjectSpace.appendChild(oneProjCard);
+
+        //Card header
+        const projHeader = doc.createElement('div');
+        projHeader.classList.add('allProjectsContainersHeader');
+
+        const h1 = doc.createElement('h1');
+        h1.textContent = proj.title;
+
+        const menuButton = doc.createElement('img');
+        menuButton.setAttribute('src', './images/dotmenu.svg');
+        menuButton.classList.add('projMenuBtn');
+        menuButton.addEventListener('click', function() {
+            //This function opens the menu when clicked
+        });
+
+        projHeader.append(h1, menuButton);
+
+        oneProjCard.appendChild(projHeader);
+
+        //Card body
+        const projCardBody = doc.createElement('div');
+
+            //Add to do button
+        const addTodoDiv = doc.createElement('div');
+        addTodoDiv.classList.add('addTodoDiv');
+
+        const addTodoImg = doc.createElement('img');
+        addTodoImg.setAttribute('src', './images/add.svg');
+
+        const addTodoText = doc.createElement('span');
+        addTodoText.textContent = 'New task';
+
+        addTodoDiv.addEventListener('click', function() {
+            newToDo.showForm(proj);
+        });
+
+        addTodoDiv.append(addTodoImg, addTodoText);
+
+        projCardBody.appendChild(addTodoDiv);
+
+            //Add each to do item to page
+        proj.toDoItems.forEach((item) => {
+            showTodo(item, projCardBody);
+        });
+
+        oneProjCard.appendChild(projCardBody);
+
+        content.appendChild(oneProjectSpace);
+    }
+
+    //Add each to do item to page
+    function showTodo(item, body) {
+        const todoContainer = doc.createElement('div');
+        todoContainer.textContent = item.title;
+        body.appendChild(todoContainer);
+
+        //YOU ARE HERE. You need to add a way to add a to do item.
+    }
+
+    function showAddTodo(proj){
+
     }
 
     return {
         showAllProjects,
         showOneProject,
+        showTodo,
     }
 
 })(document);

@@ -223,14 +223,51 @@ a {
 .projMenuBtn:hover {
     background-color: var(--ashgray);
     transition: 0.2s;
+    cursor: pointer;
 }
 
-#oneProjectSpace {
+.oneProjectSpace {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.oneProjectCard {
+    display: grid;
+    background-color: white;
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid var(--ashgray);
+}
+
+.allProjectsContainersHeader>h1 {
+    padding: 5px 0 10px 40px;
+    margin: 0;
+}
+
+.addTodoDiv {
+    display: flex;
+    border-radius: 5px;
+    width: auto;
+    align-items: center;
+    font-size: 1.3rem;
+    padding: 4px 4px 4px 20px;
+}
+
+.addTodoDiv > img {
+    width: 25px;
+    height: 25px;
+}
+
+.addTodoDiv > span {
     
 }
 
-.oneProjectContainers {
-    display: grid;
+.addTodoDiv:hover {
+    cursor: pointer;
+    background-color: var(--raspberry);
 }
 
 /* -----------------New Project Form---------------- */
