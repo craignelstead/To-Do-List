@@ -380,3 +380,44 @@ label {
 #newToDoFormDiv {
     
 }
+
+#formBody > #priorityDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.priorityBtn {
+    height: 20px;
+    width: 30px;
+    border: 1px solid var(--ashgray);
+    border-radius: 2px;
+    padding: 3px 8px;
+}
+
+.priorityBtn:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 4px 0px var(--charcoal) inset;
+    -moz-box-shadow: 0 0 4px 0px var(--charcoal) inset;
+    box-shadow: 0 0 4px 0px var(--charcoal) inset;
+}
+
+.low {
+    color: var(--darkblue);
+}
+
+.med {
+    color: var(--orange);
+}
+
+.high {
+    color: var(--raspberry);
+}
+
+.selectedPriority {
+    border: 1px solid black;
+    -webkit-box-shadow: 0 0 4px 0px var(--charcoal) inset;
+    -moz-box-shadow: 0 0 4px 0px var(--charcoal) inset;
+    box-shadow: 0 0 4px 0px var(--charcoal) inset;
+}

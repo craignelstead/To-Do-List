@@ -222,8 +222,28 @@ export const newToDo = (function(doc) {
         //titleMsg.classList.add('hidden');
         titleMsg.setAttribute('id', 'nameMsg');
 
-        form.appendChild(title);
-        form.appendChild(titleMsg);
+        body.appendChild(title);
+        body.appendChild(titleMsg);
+
+            //DUE DATE GOES HERE
+
+            //Priority
+        const priorityDiv = doc.createElement('div');
+        priorityDiv.setAttribute('id', 'priorityDiv');
+
+        const priorityLabel = doc.createElement('span');
+        priorityLabel.textContent = 'Priority:';
+
+        priorityDiv.appendChild(priorityLabel);
+
+        buildPriorityButton(priorityDiv, 'low');
+        buildPriorityButton(priorityDiv, 'med');
+        buildPriorityButton(priorityDiv, 'high');
+        
+
+        body.appendChild(priorityDiv);
+
+        //YOU ARE HERE. ADD PRIORITY SELECTER
 
         //Footer
         const footer = doc.createElement('div');
@@ -234,6 +254,30 @@ export const newToDo = (function(doc) {
         newToDoFormDiv.appendChild(form);
 
         container.appendChild(newToDoFormDiv);
+    }
+
+    //Build a priority button
+    function buildPriorityButton(parentDiv, priority) {
+        const newBtn = doc.createElement('div');
+        newBtn.classList.add(priority);
+        newBtn.classList.add('priorityBtn');
+
+        //First character uppercase
+        const displayString = priority[0].toUpperCase() + priority.slice(1);
+        newBtn.textContent = displayString;
+
+        //Add event listener to select priority
+        newBtn.addEventListener('click', function(event) {
+            Array.from(doc.querySelectorAll('.priorityBtn')).forEach((btn) => {
+                btn.classList.remove('selectedPriority');
+            });
+
+            this.classList.add('selectedPriority');
+        });
+
+        if (priority === 'low') {newBtn.classList.add('selectedPriority');}
+
+        parentDiv.appendChild(newBtn);
     }
 
     //Show error message when no title is given
@@ -416,8 +460,6 @@ export const show = (function(doc) {
         const todoContainer = doc.createElement('div');
         todoContainer.textContent = item.title;
         body.appendChild(todoContainer);
-
-        //YOU ARE HERE. You need to add a way to add a to do item.
     }
 
     function showAddTodo(proj){
