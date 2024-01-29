@@ -481,7 +481,7 @@ export const show = (function(doc) {
     //Add each to do item to page
     function showTodo(item, body) {
         const todoContainer = doc.createElement('div');
-        todoContainer.textContent = item.title + item.priority;
+        todoContainer.textContent = item.title + item.priority + item.timeCreated;
         body.appendChild(todoContainer);
     }
 
@@ -497,9 +497,6 @@ export const show = (function(doc) {
 export const listeners = (function(doc) {
     const todoToday = doc.getElementById('todoToday');
     //todoToday.addEventListener('click',);
-
-    const todoThisWeek = doc.getElementById('todoThisWeek');
-    //todoThisWeek.addEventListener('click',);
 
     const allProjects = doc.getElementById('allProjects');
     allProjects.addEventListener('click', show.showAllProjects);

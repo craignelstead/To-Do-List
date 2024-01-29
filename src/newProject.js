@@ -1,6 +1,7 @@
 //Project Creator
 
 import { validate } from './validateInput';
+import { formatISO9075 } from "date-fns";
 
 export const Project = (title, description, toDoItems, projectStatus, timeCreated) => {
 
@@ -8,7 +9,7 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
     description = description;
     toDoItems = toDoItems;
     projectStatus = 'Incomplete';
-    timeCreated = timeCreated;
+    timeCreated = formatISO9075(Date.now());
 
     //Shortens description if longer than 100 characters
     function hideLongDescription(desc) {
