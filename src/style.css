@@ -298,6 +298,7 @@ a {
     border: 1px solid var(--charcoal);
     border-radius: 15px;
     filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.3));
+    gap: 10px;
 }
 
 #formHeader {
@@ -377,8 +378,9 @@ label {
 }
 
 /* -----------------New To Do Form---------------- */
-#newToDoFormDiv {
-    
+
+#formContainer > form > div {
+    margin-top: 10px;
 }
 
 #formBody > #priorityDiv {

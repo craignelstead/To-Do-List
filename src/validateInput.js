@@ -35,7 +35,8 @@ export const validate = (function() {
         if (title.length > 0) {
             let taskCreated = ToDoItem(title, project, dueDate, 
                 priority, checklist, itemStatus, timeCreated);
-            project.addToDo(taskCreated);
+                console.log(taskCreated);
+            project.addTodo(taskCreated);
         }
         else {
             newToDo.invalid();

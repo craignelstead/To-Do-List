@@ -7,7 +7,7 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
     title = title;
     description = description;
     toDoItems = toDoItems;
-    projectStatus = projectStatus;
+    projectStatus = 'Incomplete';
     timeCreated = timeCreated;
 
     //Shortens description if longer than 100 characters
@@ -21,7 +21,8 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
     }
 
     function addTodo(item) {
-        toDoItems.push(item)
+        toDoItems.push(item);
+        console.log(Project);
     }
 
     return {

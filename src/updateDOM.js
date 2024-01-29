@@ -113,16 +113,16 @@ export const newProject = (function(doc) {
         const formFooter = doc.createElement('div');
         formFooter.setAttribute('id', 'formFooter');
 
-        const newProjectCancel = doc.createElement('button');
-        newProjectCancel.textContent = 'Cancel';
-        newProjectCancel.classList.add('formCancel');
-        newProjectCancel.addEventListener('click', hideForm);
+        // const newProjectCancel = doc.createElement('button');
+        // newProjectCancel.textContent = 'Cancel';
+        // newProjectCancel.classList.add('formCancel');
+        // newProjectCancel.addEventListener('click', hideForm);
 
         const newProjectSubmit = doc.createElement('button');
         newProjectSubmit.textContent = 'Submit';
         newProjectSubmit.classList.add('formSubmit');
 
-        formFooter.appendChild(newProjectCancel);
+        // formFooter.appendChild(newProjectCancel);
         formFooter.appendChild(newProjectSubmit);
 
             //Add event listener to submit button
@@ -219,7 +219,7 @@ export const newToDo = (function(doc) {
         const titleMsg = doc.createElement('p');
         titleMsg.textContent = 'Task must have a name';
         titleMsg.classList.add('formMessage');
-        //titleMsg.classList.add('hidden');
+        titleMsg.classList.add('hidden');
         titleMsg.setAttribute('id', 'nameMsg');
 
         body.appendChild(title);
@@ -243,11 +243,29 @@ export const newToDo = (function(doc) {
 
         body.appendChild(priorityDiv);
 
-        //YOU ARE HERE. ADD PRIORITY SELECTER
-
         //Footer
         const footer = doc.createElement('div');
+        footer.setAttribute('id', 'formFooter');
 
+        const newTaskSubmit = doc.createElement('button');
+        newTaskSubmit.textContent = 'Submit';
+        newTaskSubmit.classList.add('formSubmit');
+
+        footer.appendChild(newTaskSubmit);
+
+            //Add event listener to submit button to validate input
+        newTaskSubmit.addEventListener('click', function(event){
+            event.preventDefault();
+
+            const priority = getPriority();
+
+            validate.todoForm(
+                title.value, 
+                proj,
+                'Date',
+                priority);
+            newProject.hideForm();
+        });
 
         //Button that validates input
         form.append(body, footer);
@@ -282,7 +300,12 @@ export const newToDo = (function(doc) {
 
     //Show error message when no title is given
     function invalid() {
+        doc.getElementById('nameMsg').classList.toggle('hidden');
+    }
 
+    //Determine the selected priority level for a task
+    function getPriority(){
+        return doc.querySelector('.selectedPriority').textContent;
     }
 
     return {
@@ -458,12 +481,8 @@ export const show = (function(doc) {
     //Add each to do item to page
     function showTodo(item, body) {
         const todoContainer = doc.createElement('div');
-        todoContainer.textContent = item.title;
+        todoContainer.textContent = item.title + item.priority;
         body.appendChild(todoContainer);
-    }
-
-    function showAddTodo(proj){
-
     }
 
     return {
