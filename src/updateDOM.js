@@ -494,7 +494,7 @@ export const show = (function(doc) {
 
             //Add each to do item to page------------------
         proj.toDoItems.forEach((item) => {
-            showTodo(item, projCardBody);
+            showTodo(item, projCardBody, proj);
         });
 
         oneProjCard.appendChild(projCardBody);
@@ -503,7 +503,7 @@ export const show = (function(doc) {
     }
 
     //Add each to do item to page
-    function showTodo(item, body) {
+    function showTodo(item, body, proj) {
         const todoContainer = doc.createElement('div');
         todoContainer.classList.add('task');
         
@@ -511,6 +511,11 @@ export const show = (function(doc) {
 
         const checkBox = doc.createElement('input');
         checkBox.setAttribute('type', 'checkbox');
+
+        checkBox.addEventListener('click', () => {
+            proj.removeTodo(item);
+            showOneProject(proj);
+        });
 
         const taskTitle = doc.createElement('span');
         taskTitle.textContent = item.title;

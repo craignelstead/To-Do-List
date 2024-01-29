@@ -4,8 +4,7 @@ import { newProject, updateSidebar, newToDo, show } from './updateDOM';
 import { Project } from './newProject';
 import { projects } from './index';
 
-import { formatDistance, subDays } from "date-fns";
-import { forEach } from 'neo-async';
+import { format } from "date-fns";
 import { ToDoItem } from './newToDo';
 
 export const validate = (function() {
@@ -33,6 +32,11 @@ export const validate = (function() {
     function todoForm(title, project, dueDate, priority,
         checklist, itemStatus, timeCreated) {
         if (title.length > 0) {
+            //Sets due date to today by default if no date entered
+            if (dueDate == '') {
+                dueDate = format(Date.now(), 'MM/dd/yyyy');
+            }
+
             let taskCreated = ToDoItem(title, project, dueDate, 
                 priority, checklist, itemStatus, timeCreated);
             project.addTodo(taskCreated);
@@ -48,14 +52,15 @@ export const validate = (function() {
     //projects in index
     function valid(name, description) {
         let projectFromForm = Project(name, description, [], 
-            'Incomplete', 'Time');
+            'Incomplete');
     
         projects.myProjects.push(projectFromForm);
-        console.log(projects.myProjects);
 
         newProject.hideForm();
 
         updateSidebar.addNewProject(projectFromForm);
+
+        show.showAllProjects();
     }
 
     function invalid(msg) {

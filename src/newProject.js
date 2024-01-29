@@ -26,8 +26,11 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         toDoItems.push(item);
     }
 
-    function removeTodo(item) {
-        toDoItems.remove(item);
+    //Remove a task from toDoItems
+    function removeTodo(task) {
+        console.log(toDoItems);
+        toDoItems = toDoItems.filter(e => e !== task);
+        console.log(toDoItems);
     }
 
     return {
