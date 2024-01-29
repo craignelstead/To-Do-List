@@ -21,9 +21,13 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         }
     }
 
+    //Adds task to project
     function addTodo(item) {
         toDoItems.push(item);
-        console.log(Project);
+    }
+
+    function removeTodo(item) {
+        toDoItems.remove(item);
     }
 
     return {
@@ -34,5 +38,6 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         timeCreated,
         hideLongDescription,
         addTodo,
+        removeTodo,
     }
 }

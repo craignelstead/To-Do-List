@@ -7,7 +7,7 @@ import { ToDoItem } from './newToDo';
 import { validate } from './validateInput';
 
 //date-fns
-import { formatDistance, subDays } from "date-fns";
+import { format } from "date-fns";
 
 //Projects
 export const projects = (function() {

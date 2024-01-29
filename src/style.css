@@ -423,3 +423,62 @@ label {
     -moz-box-shadow: 0 0 4px 0px var(--charcoal) inset;
     box-shadow: 0 0 4px 0px var(--charcoal) inset;
 }
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--ashgray);
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.task>div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.task img {
+    border-radius: 12.5px;
+    width: 25px;
+    height: 25px;
+    padding: 3px;
+}
+
+.task input {
+    height: 20px;
+    width: 20px;
+}
+
+.task input:hover {
+    cursor: pointer;
+}
+
+.task img:hover {
+    cursor: pointer;
+    background-color: var(--ashgray);
+}
+
+#projCardBody {
+    display: flex;
+    flex-direction: column;
+}
+
+#projCardBody>span {
+    font-size: 1.2rem;
+    margin: 10px;
+}
+
+.lowTask {
+    border-left: 10px solid var(--darkblue);
+}
+
+.medTask {
+    border-left: 10px solid var(--orange);
+}
+
+.highTask {
+    border-left: 10px solid var(--raspberry);
+}

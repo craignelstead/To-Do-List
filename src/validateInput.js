@@ -1,6 +1,6 @@
 //Validates input for new project
 
-import { newProject, updateSidebar, newToDo } from './updateDOM';
+import { newProject, updateSidebar, newToDo, show } from './updateDOM';
 import { Project } from './newProject';
 import { projects } from './index';
 
@@ -36,6 +36,8 @@ export const validate = (function() {
             let taskCreated = ToDoItem(title, project, dueDate, 
                 priority, checklist, itemStatus, timeCreated);
             project.addTodo(taskCreated);
+            newProject.hideForm();
+            show.showOneProject(project);
         }
         else {
             newToDo.invalid();

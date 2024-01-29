@@ -3,6 +3,7 @@
 import { validate } from './validateInput';
 import { projects } from './index';
 import { ToDoItem } from './newToDo';
+import { format } from "date-fns";
 
 //New Project Form
 export const newProject = (function(doc) {
@@ -206,7 +207,7 @@ export const newToDo = (function(doc) {
         const body = doc.createElement('div');
         body.setAttribute('id', 'formBody');
 
-            //Task Name
+            //Task Name-----------------
         const title = doc.createElement('input');
         title.setAttribute('type', 'text');
         title.setAttribute('name', 'taskname');
@@ -225,9 +226,23 @@ export const newToDo = (function(doc) {
         body.appendChild(title);
         body.appendChild(titleMsg);
 
-            //DUE DATE GOES HERE
+            //Due Date-----------------
+        const dueDateDiv = doc.createElement('div');
 
-            //Priority
+        const dueDateLabel = doc.createElement('label');
+        dueDateLabel.setAttribute('for', 'dueDateInput');
+        dueDateLabel.textContent = "Due:";
+
+        const dueDateInput = doc.createElement('input');
+        dueDateInput.setAttribute('type', 'date');
+        dueDateInput.setAttribute('id', 'dueDateInput');
+        dueDateInput.setAttribute('value', format(Date.now(), 'MM/dd/yyyy'));
+        dueDateInput.setAttribute('min', Date.now());
+
+        dueDateDiv.append(dueDateLabel, dueDateInput);
+        body.appendChild(dueDateDiv);
+
+            //Priority-----------------
         const priorityDiv = doc.createElement('div');
         priorityDiv.setAttribute('id', 'priorityDiv');
 
@@ -262,9 +277,9 @@ export const newToDo = (function(doc) {
             validate.todoForm(
                 title.value, 
                 proj,
-                'Date',
+                dueDateInput.value,
                 priority);
-            newProject.hideForm();
+            
         });
 
         //Button that validates input
@@ -449,8 +464,17 @@ export const show = (function(doc) {
 
         //Card body
         const projCardBody = doc.createElement('div');
+        projCardBody.setAttribute('id', 'projCardBody');
 
-            //Add to do button
+            //Description------------------
+        const projDescription = doc.createElement('span');
+        projDescription.textContent = proj.description;
+        const projCreated = doc.createElement('span');
+        projCreated.textContent = `Created ${proj.timeCreated}`;
+
+        projCardBody.append(projDescription, projCreated);
+
+            //Add to do button------------------
         const addTodoDiv = doc.createElement('div');
         addTodoDiv.classList.add('addTodoDiv');
 
@@ -468,7 +492,7 @@ export const show = (function(doc) {
 
         projCardBody.appendChild(addTodoDiv);
 
-            //Add each to do item to page
+            //Add each to do item to page------------------
         proj.toDoItems.forEach((item) => {
             showTodo(item, projCardBody);
         });
@@ -481,8 +505,56 @@ export const show = (function(doc) {
     //Add each to do item to page
     function showTodo(item, body) {
         const todoContainer = doc.createElement('div');
-        todoContainer.textContent = item.title + item.priority + item.timeCreated;
+        todoContainer.classList.add('task');
+        
+        const div1 = doc.createElement('div');
+
+        const checkBox = doc.createElement('input');
+        checkBox.setAttribute('type', 'checkbox');
+
+        const taskTitle = doc.createElement('span');
+        taskTitle.textContent = item.title;
+        
+        div1.append(checkBox, taskTitle);
+
+
+        const div2 = doc.createElement('div');
+
+        const taskDue = doc.createElement('span');
+        taskDue.textContent = `Due: ${item.dueDate}`;
+
+        const editBtn = doc.createElement('img');
+        editBtn.setAttribute('src', './images/edit.svg');
+
+        const trashBtn = doc.createElement('img');
+        trashBtn.setAttribute('src', './images/delete.svg');
+
+        div2.append(taskDue, editBtn, trashBtn);
+
+        todoContainer.append(div1, div2);
+
+        updateTaskBorder(item, todoContainer);
+
         body.appendChild(todoContainer);
+    }
+
+    //Updates style of task based on priority level
+    function updateTaskBorder(task, div) {
+        div.classList.remove('lowTask');
+        div.classList.remove('medTask');
+        div.classList.remove('highTask');
+
+        switch (task.priority) {
+            case 'Low':
+                div.classList.add('lowTask');
+                break;
+            case 'Med':
+                div.classList.add('medTask');
+                break;
+            case 'High':
+                div.classList.add('highTask');
+                break;
+        }
     }
 
     return {
