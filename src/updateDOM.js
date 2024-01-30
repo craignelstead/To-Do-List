@@ -727,9 +727,11 @@ export const listeners = (function(doc) {
         show.taskSpace('Due Today');
         getTasks.filtered(format(Date.now(), 'MM/dd/yyyy'));
     });
+    todoToday.addEventListener('click', updateSidebar.showCurrent);
 
     const allProjects = doc.getElementById('allProjects');
     allProjects.addEventListener('click', show.showAllProjects);
+    allProjects.addEventListener('click', updateSidebar.showCurrent);
 
     const newProjectBtn = doc.getElementById('newProjectSideBar');
     newProjectBtn.addEventListener('click', newProject.showForm);
@@ -739,5 +741,6 @@ export const listeners = (function(doc) {
         show.taskSpace('All Tasks');
         getTasks.filtered('');
     });
+    allTodos.addEventListener('click', updateSidebar.showCurrent);
 
 })(document);
