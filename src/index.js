@@ -1,6 +1,6 @@
 import './style.css';
 
-import { newProject, updateSidebar } from './updateDOM';
+import { newProject, updateSidebar, show } from './updateDOM';
 import { listeners } from './updateDOM';
 import { Project } from './newProject';
 import { ToDoItem } from './newToDo';
@@ -19,4 +19,25 @@ export const projects = (function() {
         myProjects,
     }
 
+})();
+
+//Get tasks due today
+export const getTasks = (function() {
+
+    function filtered(filter) {
+        const newTaskList = [];
+        projects.myProjects.forEach(proj => {
+            proj.toDoItems.forEach(item => {
+                const { isEqual } = require("date-fns");
+                if (isEqual(filter, item.dueDate)) {
+                    newTaskList.push(item);
+                    show.showFilteredTasks(item, proj);
+                }
+            });
+        });
+    }
+
+    return {
+        filtered,
+    }
 })();

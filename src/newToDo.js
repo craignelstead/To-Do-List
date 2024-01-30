@@ -8,7 +8,7 @@ checklist, itemStatus, timeCreated) => {
 
     title = title;
     project = project;
-    dueDate = dueDate;
+    dueDate = format(dueDate, 'MM/dd/yyyy');
     priority = priority;
     checklist = checklist;
     itemStatus = itemStatus;

@@ -1,7 +1,7 @@
 //Updates DOM for content
 
 import { validate } from './validateInput';
-import { projects } from './index';
+import { projects, getTasks } from './index';
 import { ToDoItem } from './newToDo';
 import { format } from "date-fns";
 
@@ -520,8 +520,6 @@ export const show = (function(doc) {
             }
         });
 
-        console.log(proj.toDoItems);
-
         const taskTitle = doc.createElement('span');
         taskTitle.textContent = item.title;
         
@@ -571,10 +569,100 @@ export const show = (function(doc) {
         }
     }
 
+    //Show all tasks that meet filter requirement
+    function showFilteredTasks(filteredItem, proj) {
+        const todoContainer = doc.createElement('div');
+        todoContainer.classList.add('task');
+        
+        const div1 = doc.createElement('div');
+
+        const checkBox = doc.createElement('input');
+        checkBox.setAttribute('type', 'checkbox');
+
+        //If box is checked, remove task from array and page
+        checkBox.addEventListener('change', () => {
+            if (checkBox.checked === true) {
+                proj.removeTodo(item);
+                showOneProject(proj);
+            }
+        });
+
+        const taskTitle = doc.createElement('span');
+        taskTitle.textContent = filteredItem.title;
+        
+        div1.append(checkBox, taskTitle);
+
+        const div2 = doc.createElement('div');
+
+        const taskDue = doc.createElement('span');
+        taskDue.textContent = `Due: ${filteredItem.dueDate}`;
+
+        const editBtn = doc.createElement('img');
+        editBtn.setAttribute('src', './images/edit.svg');
+
+        const trashBtn = doc.createElement('img');
+        trashBtn.setAttribute('src', './images/delete.svg');
+        trashBtn.addEventListener('click', () => {
+            proj.removeTodo(filteredItem);
+            showOneProject(proj);
+        });
+
+        div2.append(taskDue, editBtn, trashBtn);
+
+        todoContainer.append(div1, div2);
+
+        updateTaskBorder(filteredItem, todoContainer);
+
+        const taskArea = doc.querySelector('.oneProjectCard');
+        taskArea.appendChild(todoContainer);
+    }
+
+    //Updates style of task based on priority level
+    function updateTaskBorder(task, div) {
+        div.classList.remove('lowTask');
+        div.classList.remove('medTask');
+        div.classList.remove('highTask');
+
+        switch (task.priority) {
+            case 'Low':
+                div.classList.add('lowTask');
+                break;
+            case 'Med':
+                div.classList.add('medTask');
+                break;
+            case 'High':
+                div.classList.add('highTask');
+                break;
+        }
+    }
+
+    function taskSpace(header) {
+        clearWorkSpace.clearAll();
+
+        const content = doc.getElementById('content');
+
+        const space = doc.createElement('div');
+        space.classList.add('oneProjectSpace');
+
+        const taskArea = doc.createElement('div');
+        taskArea.classList.add('oneProjectCard');
+
+        const h1 = doc.createElement('h1');
+        h1.textContent = header;
+        h1.classList.add('filteredHeader');
+        taskArea.appendChild(h1);
+
+        space.appendChild(taskArea);
+
+        content.appendChild(space);
+    }
+
     return {
         showAllProjects,
         showOneProject,
         showTodo,
+        showFilteredTasks,
+        taskSpace,
     }
 
 })(document);
@@ -582,7 +670,10 @@ export const show = (function(doc) {
 //Event listeners
 export const listeners = (function(doc) {
     const todoToday = doc.getElementById('todoToday');
-    //todoToday.addEventListener('click',);
+    todoToday.addEventListener('click', () => {
+        show.taskSpace('Due today');
+        getTasks.filtered(format(Date.now(), 'MM/dd/yyyy'));
+    });
 
     const allProjects = doc.getElementById('allProjects');
     allProjects.addEventListener('click', show.showAllProjects);
