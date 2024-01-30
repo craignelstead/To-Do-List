@@ -35,6 +35,28 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         }
     }
 
+    //Updates title from input
+    function updateTitle(newTitle) {
+        if (newTitle.value === '') {
+            return title;
+        }
+        else {
+            title = newTitle.value;
+            return title;
+        }
+    }
+
+    //Updates description from input
+    function updateDescription(newDesc) {
+        if (newDesc.value == '') {
+            return description;
+        }
+        else {
+            description = newDesc.value;
+            return description;
+        }
+    }
+
     return {
         title,
         description,
@@ -44,5 +66,7 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         hideLongDescription,
         addTodo,
         removeTodo,
+        updateTitle,
+        updateDescription,
     }
 }

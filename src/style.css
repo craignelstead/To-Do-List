@@ -12,6 +12,7 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 
 li, ul {
@@ -315,6 +316,14 @@ label {
     justify-content: flex-end;
     align-items: flex-end;
     gap: 10px;
+}
+
+.projEditTitle {
+    font-size: 2rem;
+}
+
+.projEditTitle, .taskEditTitle {
+    border: 0;
 }
 
 /* -----------------New To Do Form---------------- */

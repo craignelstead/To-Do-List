@@ -150,12 +150,58 @@ export const newProject = (function(doc) {
         label.classList.remove('hidden');
     }
 
+    //Removes title, adds input, clicking out of input updates title
+    function editProjTitle(evt, proj, parent) {
+        evt.currentTarget.remove();
+        const input = doc.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('value', proj.title);
+        input.classList.add('projEditTitle');
+        parent.prepend(input);
+        //When input box loses focus, update title and remove input box
+        input.addEventListener('blur', () => {
+            input.remove();
+            const newTitle = doc.createElement('h1');
+            proj.title = proj.updateTitle(input);
+            newTitle.textContent = proj.title;
+            parent.prepend(newTitle);
+            //Add event listener to make future editing possible
+            newTitle.addEventListener('click', (e) => {
+                newProject.editProjTitle(e, proj, parent);
+            });
+        });
+        input.focus();
+    }
+
+    function editDescription(evt, proj, parent) {
+        evt.currentTarget.remove();
+        const input = doc.createElement('textarea');
+        input.textContent = proj.description;
+        input.classList.add('projEditDescription');
+        parent.prepend(input);
+        //When input box loses focus, update title and remove input box
+        input.addEventListener('blur', () => {
+            input.remove();
+            const newDesc = doc.createElement('p');
+            proj.description = proj.updateDescription(input);
+            newDesc.textContent = proj.description;
+            parent.prepend(newDesc);
+            //Add event listener to make future editing possible
+            newDesc.addEventListener('click', (e) => {
+                newProject.editDescription(e, proj, parent);
+            });
+        });
+        input.focus();
+    }
+
     return {
         showForm,
         hideForm,
         invalidInput,
         createBlur,
         noBlur,
+        editProjTitle,
+        editDescription,
     }
 })(document);
 
@@ -401,7 +447,6 @@ export const updateSidebar = (function(doc) {
 
         li.addEventListener('click', function() {
             show.showOneProject(proj);
-            // updateSidebar.showCurrent(e.target);
         });
 
         li.addEventListener('click', updateSidebar.showCurrent);
@@ -481,13 +526,6 @@ export const show = (function(doc) {
             const h2 = doc.createElement('h2');
             h2.textContent = proj.title;
 
-            // const menuButton = doc.createElement('img');
-            // menuButton.setAttribute('src', './images/dotmenu.svg');
-            // menuButton.classList.add('projMenuBtn');
-            // menuButton.addEventListener('click', function() {
-            //     //This function opens the menu when clicked
-            // });
-
             projHeader.append(h2);
             projContainer.appendChild(projHeader);
 
@@ -497,9 +535,9 @@ export const show = (function(doc) {
             description.textContent = proj.hideLongDescription(proj.description);
 
             const numOfTodos = doc.createElement('p');
-            numOfTodos.textContent = `To Dos: ${proj.toDoItems.length}`;
+            numOfTodos.textContent = `Tasks: ${proj.toDoItems.length}`;
 
-            projBody.append(description, numOfTodos);
+            projBody.append(numOfTodos, description);
 
             projContainer.appendChild(projBody);
 
@@ -532,6 +570,10 @@ export const show = (function(doc) {
         const h1 = doc.createElement('h1');
         h1.textContent = proj.title;
 
+        h1.addEventListener('click', (e) => {
+            newProject.editProjTitle(e, proj, projHeader);
+        });
+
         const menuBtns = doc.createElement('div');
         menuBtns.setAttribute('id', 'menuBtns');
 
@@ -557,6 +599,10 @@ export const show = (function(doc) {
         projDescription.textContent = proj.description;
         const projCreated = doc.createElement('span');
         projCreated.textContent = `Created ${proj.timeCreated}`;
+
+        projDescription.addEventListener('click', (e) => {
+            newProject.editDescription(e, proj, projCardBody);
+        });
 
         projCardBody.append(projDescription, projCreated);
 
