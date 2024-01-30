@@ -354,7 +354,10 @@ export const updateSidebar = (function(doc) {
 
         li.addEventListener('click', function() {
             show.showOneProject(proj);
+            // updateSidebar.showCurrent(e.target);
         });
+
+        li.addEventListener('click', updateSidebar.showCurrent);
     }
 
     //Remove project from sidebar
@@ -370,9 +373,24 @@ export const updateSidebar = (function(doc) {
         show.showAllProjects();
     }
 
+    //Show current sidebar selection
+    function showCurrent(evt) {
+        removeCurrent();
+        evt.currentTarget.classList.add('selectedSide');
+    }
+
+    //Clear all sidebar selections
+    function removeCurrent() {
+        const sideItems = Array.from(doc.querySelectorAll('li'));
+        sideItems.forEach((side) => {
+            side.classList.remove('selectedSide');
+        });
+    }
+
     return {
         addNewProject,
         removeProject,
+        showCurrent,
     }
 })(document);
 
@@ -684,6 +702,13 @@ export const show = (function(doc) {
 
         content.appendChild(space);
     }
+
+    function showYear() {
+        const crYear = doc.getElementById('copyrightyear');
+        crYear.textContent = format(Date.now(), 'yyyy');
+    }
+
+    showYear();
 
     return {
         showAllProjects,
