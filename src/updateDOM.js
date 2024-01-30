@@ -512,13 +512,6 @@ export const show = (function(doc) {
         const menuBtns = doc.createElement('div');
         menuBtns.setAttribute('id', 'menuBtns');
 
-        const edit = doc.createElement('img');
-        edit.setAttribute('src', './images/edit.svg');
-        edit.classList.add('projMenuBtn');
-        edit.addEventListener('click', () => {
-            //This function opens the menu when clicked
-        });
-
         const trash = doc.createElement('img');
         trash.setAttribute('src', './images/delete.svg');
         trash.classList.add('projMenuBtn');
@@ -526,7 +519,7 @@ export const show = (function(doc) {
             projects.deleteProject(proj);
         });
 
-        menuBtns.append(edit, trash);
+        menuBtns.append(trash);
 
         projHeader.append(h1, menuBtns);
 
@@ -605,9 +598,6 @@ export const show = (function(doc) {
         const taskDue = doc.createElement('span');
         taskDue.textContent = `Due: ${item.dueDate}`;
 
-        const editBtn = doc.createElement('img');
-        editBtn.setAttribute('src', './images/edit.svg');
-
         const trashBtn = doc.createElement('img');
         trashBtn.setAttribute('src', './images/delete.svg');
         trashBtn.addEventListener('click', () => {
@@ -615,7 +605,7 @@ export const show = (function(doc) {
             showOneProject(proj);
         });
 
-        div2.append(taskDue, editBtn, trashBtn);
+        div2.append(taskDue, trashBtn);
 
         todoContainer.append(div1, div2);
 
@@ -656,13 +646,17 @@ export const show = (function(doc) {
         //If box is checked, remove task from array and page
         checkBox.addEventListener('change', () => {
             if (checkBox.checked === true) {
-                proj.removeTodo(item);
+                proj.removeTodo(filteredItem);
                 showOneProject(proj);
             }
         });
 
         const taskTitle = doc.createElement('span');
         taskTitle.textContent = filteredItem.title;
+
+        taskTitle.addEventListener('click', (e) => {
+            newToDo.editTaskTitle(e, filteredItem, div1);
+        });
         
         div1.append(checkBox, taskTitle);
 
@@ -671,9 +665,6 @@ export const show = (function(doc) {
         const taskDue = doc.createElement('span');
         taskDue.textContent = `Due: ${filteredItem.dueDate}`;
 
-        const editBtn = doc.createElement('img');
-        editBtn.setAttribute('src', './images/edit.svg');
-
         const trashBtn = doc.createElement('img');
         trashBtn.setAttribute('src', './images/delete.svg');
         trashBtn.addEventListener('click', () => {
@@ -681,7 +672,7 @@ export const show = (function(doc) {
             showOneProject(proj);
         });
 
-        div2.append(taskDue, editBtn, trashBtn);
+        div2.append(taskDue, trashBtn);
 
         todoContainer.append(div1, div2);
 
