@@ -15,8 +15,22 @@ export const projects = (function() {
     //Initiate empty array of projects
     let myProjects = [];
 
+    //If index matches project to be deleted, remove it from array and sidebar
+    function deleteProject(proj) {
+        
+
+        for (let i = 0; i < myProjects.length; i++){
+            if (myProjects[i] === proj) {
+                myProjects.splice(i, 1);
+            }
+        }
+
+        updateSidebar.removeProject(proj);
+    }
+
     return {
         myProjects,
+        deleteProject,
     }
 
 })();

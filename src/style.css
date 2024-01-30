@@ -262,10 +262,6 @@ a {
     height: 25px;
 }
 
-.addTodoDiv > span {
-    
-}
-
 .addTodoDiv:hover {
     cursor: pointer;
     background-color: var(--ashgray);
@@ -351,14 +347,6 @@ label {
 
 .formInvalid {
     border-color: red;
-}
-
-.formCancel {
-
-}
-
-.formSubmit {
-
 }
 
 .hidden {
@@ -470,6 +458,11 @@ label {
 #projCardBody>span {
     font-size: 1.2rem;
     margin: 10px;
+}
+
+#menuBtns {
+    display: flex;
+    gap: 10px;
 }
 
 .lowTask {

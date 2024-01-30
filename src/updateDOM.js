@@ -345,6 +345,8 @@ export const updateSidebar = (function(doc) {
         img.setAttribute('alt', 'Project');
         
         span.textContent = proj.title;
+        li.setAttribute('data-project', proj.title);
+        li.classList.add('projectLi');
         li.appendChild(img);
         li.appendChild(span);
 
@@ -355,8 +357,22 @@ export const updateSidebar = (function(doc) {
         });
     }
 
+    //Remove project from sidebar
+    function removeProject(proj) {
+        const allLi = Array.from(doc.querySelectorAll('.projectLi'));
+        allLi.forEach((li) => {
+            let data = li.getAttribute('data-project');
+            if (data == proj.title) {
+                li.remove();
+            }
+        });
+
+        show.showAllProjects();
+    }
+
     return {
         addNewProject,
+        removeProject,
     }
 })(document);
 
@@ -400,14 +416,14 @@ export const show = (function(doc) {
             const h2 = doc.createElement('h2');
             h2.textContent = proj.title;
 
-            const menuButton = doc.createElement('img');
-            menuButton.setAttribute('src', './images/dotmenu.svg');
-            menuButton.classList.add('projMenuBtn');
-            menuButton.addEventListener('click', function() {
-                //This function opens the menu when clicked
-            });
+            // const menuButton = doc.createElement('img');
+            // menuButton.setAttribute('src', './images/dotmenu.svg');
+            // menuButton.classList.add('projMenuBtn');
+            // menuButton.addEventListener('click', function() {
+            //     //This function opens the menu when clicked
+            // });
 
-            projHeader.append(h2, menuButton);
+            projHeader.append(h2);
             projContainer.appendChild(projHeader);
 
             //Card body
@@ -451,14 +467,26 @@ export const show = (function(doc) {
         const h1 = doc.createElement('h1');
         h1.textContent = proj.title;
 
-        const menuButton = doc.createElement('img');
-        menuButton.setAttribute('src', './images/dotmenu.svg');
-        menuButton.classList.add('projMenuBtn');
-        menuButton.addEventListener('change', function() {
+        const menuBtns = doc.createElement('div');
+        menuBtns.setAttribute('id', 'menuBtns');
+
+        const edit = doc.createElement('img');
+        edit.setAttribute('src', './images/edit.svg');
+        edit.classList.add('projMenuBtn');
+        edit.addEventListener('click', () => {
             //This function opens the menu when clicked
         });
 
-        projHeader.append(h1, menuButton);
+        const trash = doc.createElement('img');
+        trash.setAttribute('src', './images/delete.svg');
+        trash.classList.add('projMenuBtn');
+        trash.addEventListener('click', () => {
+            projects.deleteProject(proj);
+        });
+
+        menuBtns.append(edit, trash);
+
+        projHeader.append(h1, menuBtns);
 
         oneProjCard.appendChild(projHeader);
 
