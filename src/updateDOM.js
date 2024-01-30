@@ -454,7 +454,7 @@ export const show = (function(doc) {
         const menuButton = doc.createElement('img');
         menuButton.setAttribute('src', './images/dotmenu.svg');
         menuButton.classList.add('projMenuBtn');
-        menuButton.addEventListener('click', function() {
+        menuButton.addEventListener('change', function() {
             //This function opens the menu when clicked
         });
 
@@ -512,10 +512,15 @@ export const show = (function(doc) {
         const checkBox = doc.createElement('input');
         checkBox.setAttribute('type', 'checkbox');
 
-        checkBox.addEventListener('click', () => {
-            proj.removeTodo(item);
-            showOneProject(proj);
+        //If box is checked, remove task from array and page
+        checkBox.addEventListener('change', () => {
+            if (checkBox.checked === true) {
+                proj.removeTodo(item);
+                showOneProject(proj);
+            }
         });
+
+        console.log(proj.toDoItems);
 
         const taskTitle = doc.createElement('span');
         taskTitle.textContent = item.title;
@@ -533,6 +538,10 @@ export const show = (function(doc) {
 
         const trashBtn = doc.createElement('img');
         trashBtn.setAttribute('src', './images/delete.svg');
+        trashBtn.addEventListener('click', () => {
+            proj.removeTodo(item);
+            showOneProject(proj);
+        });
 
         div2.append(taskDue, editBtn, trashBtn);
 

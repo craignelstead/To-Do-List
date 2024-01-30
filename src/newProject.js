@@ -28,9 +28,11 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
 
     //Remove a task from toDoItems
     function removeTodo(task) {
-        console.log(toDoItems);
-        toDoItems = toDoItems.filter(e => e !== task);
-        console.log(toDoItems);
+        for (let i = 0; i < toDoItems.length; i++){
+            if (toDoItems[i] === task) {
+                toDoItems.splice(i, 1);
+            }
+        }
     }
 
     return {
