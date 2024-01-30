@@ -323,9 +323,33 @@ export const newToDo = (function(doc) {
         return doc.querySelector('.selectedPriority').textContent;
     }
 
+    //Removes title, adds input, clicking out of input updates title
+    function editTaskTitle(evt, task, parent) {
+        evt.currentTarget.remove();
+        const input = doc.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('placeholder', task.title);
+        input.classList.add('taskEditTitle');
+        parent.appendChild(input);
+        //When input box loses focus, update title and remove input box
+        input.addEventListener('blur', () => {
+            input.remove();
+            const newTitle = doc.createElement('span');
+            task.title = task.updateTitle(input);
+            newTitle.textContent = task.title;
+            parent.appendChild(newTitle);
+            //Add event listener to make future editing possible
+            newTitle.addEventListener('click', (e) => {
+                newToDo.editTaskTitle(e, task, parent);
+            });
+        });
+        input.focus();
+    }
+
     return {
         showForm,
         invalid,
+        editTaskTitle,
     }
 
 })(document);
@@ -568,6 +592,10 @@ export const show = (function(doc) {
 
         const taskTitle = doc.createElement('span');
         taskTitle.textContent = item.title;
+
+        taskTitle.addEventListener('click', (e) => {
+            newToDo.editTaskTitle(e, item, div1);
+        });
         
         div1.append(checkBox, taskTitle);
 

@@ -14,6 +14,17 @@ checklist, itemStatus, timeCreated) => {
     itemStatus = itemStatus;
     timeCreated = format(Date.now(), 'MM/dd/yyyy');
 
+    //Update title if new title is entered
+    function updateTitle(newTitle) {
+        if (newTitle.value === '') {
+            return title;
+        }
+        else {
+            title = newTitle.value;
+            return title;
+        }
+    }
+
     return {
         title,
         project,
@@ -22,5 +33,6 @@ checklist, itemStatus, timeCreated) => {
         checklist,
         itemStatus,
         timeCreated,
+        updateTitle,
     }
 }
