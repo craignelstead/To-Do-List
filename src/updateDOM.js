@@ -671,7 +671,7 @@ export const show = (function(doc) {
 export const listeners = (function(doc) {
     const todoToday = doc.getElementById('todoToday');
     todoToday.addEventListener('click', () => {
-        show.taskSpace('Due today');
+        show.taskSpace('Due Today');
         getTasks.filtered(format(Date.now(), 'MM/dd/yyyy'));
     });
 
@@ -682,6 +682,9 @@ export const listeners = (function(doc) {
     newProjectBtn.addEventListener('click', newProject.showForm);
 
     const allTodos = doc.getElementById('allTodos');
-    // allTodos.addEventListener('click',);
+    allTodos.addEventListener('click', () => {
+        show.taskSpace('All Tasks');
+        getTasks.filtered('');
+    });
 
 })(document);
