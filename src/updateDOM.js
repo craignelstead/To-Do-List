@@ -346,10 +346,33 @@ export const newToDo = (function(doc) {
         input.focus();
     }
 
+    function editDueDate(evt, task, parent) {
+        evt.currentTarget.remove();
+        const input = doc.createElement('input');
+        input.setAttribute('type', 'date');
+        input.setAttribute('placeholder', task.dueDate);
+        input.classList.add('taskEditDueDate');
+        parent.prepend(input);
+        //When input box loses focus, update due date and remove input box
+        input.addEventListener('blur', () => {
+            input.remove();
+            const newDate = doc.createElement('span');
+            task.dueDate = task.updateDueDate(input);
+            newDate.textContent = `Due: ${task.dueDate}`;
+            parent.prepend(newDate);
+            //Add event listener to make future editing possible
+            newDate.addEventListener('click', (e) => {
+                newToDo.editDueDate(e, task, parent);
+            });
+        });
+        input.focus();
+    }
+
     return {
         showForm,
         invalid,
         editTaskTitle,
+        editDueDate,
     }
 
 })(document);
@@ -597,6 +620,9 @@ export const show = (function(doc) {
 
         const taskDue = doc.createElement('span');
         taskDue.textContent = `Due: ${item.dueDate}`;
+        taskDue.addEventListener('click', (e) => {
+            newToDo.editDueDate(e, item, div2);
+        });
 
         const trashBtn = doc.createElement('img');
         trashBtn.setAttribute('src', './images/delete.svg');
@@ -664,6 +690,10 @@ export const show = (function(doc) {
 
         const taskDue = doc.createElement('span');
         taskDue.textContent = `Due: ${filteredItem.dueDate}`;
+
+        taskDue.addEventListener('click', (e) => {
+            newToDo.editDueDate(e, filteredItem, div2);
+        });
 
         const trashBtn = doc.createElement('img');
         trashBtn.setAttribute('src', './images/delete.svg');

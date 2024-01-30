@@ -384,6 +384,10 @@ label {
     width: 100%;
 }
 
+.task>div>.taskEditDueDate {
+    width: 100%;
+}
+
 .task img {
     border-radius: 12.5px;
     width: 25px;

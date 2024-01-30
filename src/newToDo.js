@@ -25,6 +25,16 @@ checklist, itemStatus, timeCreated) => {
         }
     }
 
+    function updateDueDate(newDueDate) {
+        if (newDueDate.value === '') {
+            return dueDate;
+        }
+        else {
+            dueDate = newDueDate.value;
+            return dueDate;
+        }
+    }
+
     return {
         title,
         project,
@@ -34,5 +44,6 @@ checklist, itemStatus, timeCreated) => {
         itemStatus,
         timeCreated,
         updateTitle,
+        updateDueDate,
     }
 }
