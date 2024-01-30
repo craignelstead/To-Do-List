@@ -42,7 +42,17 @@ a {
     font-size: 1.2rem;
 }
 
-#profileCon {
+#appTitle {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+#appTitle>span {
+    font-size: 2.5rem;
+}
+
+/* #profileCon {
     display: grid;
     grid-template: 30px 30px / 60px auto;
     grid-template-areas: 
@@ -64,7 +74,7 @@ a {
 
 #profileScore {
     grid-area: message;
-}
+} */
 
 .sideItems>li {
     display: flex;
