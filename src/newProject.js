@@ -2,6 +2,7 @@
 
 import { validate } from './validateInput';
 import { format } from "date-fns";
+import { localStore } from './local';
 
 export const Project = (title, description, toDoItems, projectStatus, timeCreated) => {
 
@@ -33,6 +34,7 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
                 toDoItems.splice(i, 1);
             }
         }
+        localStore.populateStorage();
     }
 
     //Updates title from input
@@ -42,6 +44,7 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         }
         else {
             title = newTitle.value;
+            localStore.populateStorage();
             return title;
         }
     }
@@ -53,6 +56,7 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
         }
         else {
             description = newDesc.value;
+            localStore.populateStorage();
             return description;
         }
     }

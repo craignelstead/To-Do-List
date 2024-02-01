@@ -3,7 +3,7 @@
 import { newProject, updateSidebar, newToDo, show } from './updateDOM';
 import { Project } from './newProject';
 import { projects } from './index';
-
+import { localStore } from './local';
 import { format } from "date-fns";
 import { ToDoItem } from './newToDo';
 
@@ -40,6 +40,7 @@ export const validate = (function() {
             let taskCreated = ToDoItem(title, project, dueDate, 
                 priority, checklist, itemStatus, timeCreated);
             project.addTodo(taskCreated);
+            //POPULATE STORAGE
             newProject.hideForm();
             show.showOneProject(project);
         }
@@ -55,6 +56,8 @@ export const validate = (function() {
             'Incomplete');
     
         projects.myProjects.push(projectFromForm);
+
+        localStore.populateStorage();
 
         newProject.hideForm();
 

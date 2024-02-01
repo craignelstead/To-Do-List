@@ -17,6 +17,7 @@
     "browserslist": "^4.22.2",
     "buffer-from": "^1.1.2",
     "caniuse-lite": "^1.0.30001572",
+    "child_process": "^1.0.2",
     "chrome-trace-event": "^1.0.3",
     "clone-deep": "^4.0.1",
     "colorette": "^2.0.20",

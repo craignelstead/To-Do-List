@@ -2,6 +2,7 @@
 
 import { newToDo } from "./updateDOM";
 import { format } from "date-fns";
+import { localStore } from './local';
 
 export const ToDoItem = (title, project, dueDate, priority,  
 checklist, itemStatus, timeCreated) => {
@@ -21,6 +22,7 @@ checklist, itemStatus, timeCreated) => {
         }
         else {
             title = newTitle.value;
+            //POPULATE STORAGE
             return title;
         }
     }
@@ -31,6 +33,7 @@ checklist, itemStatus, timeCreated) => {
         }
         else {
             dueDate = newDueDate.value;
+            //POPULATE STORAGE
             return dueDate;
         }
     }

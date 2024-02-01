@@ -4,6 +4,7 @@ import { validate } from './validateInput';
 import { projects, getTasks } from './index';
 import { ToDoItem } from './newToDo';
 import { format } from "date-fns";
+import { localStore } from './local';
 
 //New Project Form
 export const newProject = (function(doc) {
@@ -114,11 +115,6 @@ export const newProject = (function(doc) {
         const formFooter = doc.createElement('div');
         formFooter.setAttribute('id', 'formFooter');
 
-        // const newProjectCancel = doc.createElement('button');
-        // newProjectCancel.textContent = 'Cancel';
-        // newProjectCancel.classList.add('formCancel');
-        // newProjectCancel.addEventListener('click', hideForm);
-
         const newProjectSubmit = doc.createElement('button');
         newProjectSubmit.textContent = 'Submit';
         newProjectSubmit.classList.add('formSubmit');
@@ -182,7 +178,7 @@ export const newProject = (function(doc) {
         //When input box loses focus, update title and remove input box
         input.addEventListener('blur', () => {
             input.remove();
-            const newDesc = doc.createElement('p');
+            const newDesc = doc.createElement('span');
             proj.description = proj.updateDescription(input);
             newDesc.textContent = proj.description;
             parent.prepend(newDesc);
@@ -496,8 +492,6 @@ export const clearWorkSpace = (function(doc) {
         }
     }
 
-    //Change grid layout of content for displaying all projects
-
     return {
         clearAll,
     }
@@ -513,7 +507,8 @@ export const show = (function(doc) {
         const content = doc.getElementById('content');
         const allProjectsSpace = doc.createElement('div');
         allProjectsSpace.setAttribute('id', 'allProjectsSpace');
-
+        //localStore.setProjects();
+        
         //Display each project
         projects.myProjects.forEach((proj) => {
             const projContainer = doc.createElement('div');
@@ -827,6 +822,7 @@ export const listeners = (function(doc) {
     const allProjects = doc.getElementById('allProjects');
     allProjects.addEventListener('click', show.showAllProjects);
     allProjects.addEventListener('click', updateSidebar.showCurrent);
+    // allProjects.addEventListener('click', projects.generateExistingProjects);
 
     const newProjectBtn = doc.getElementById('newProjectSideBar');
     newProjectBtn.addEventListener('click', newProject.showForm);
