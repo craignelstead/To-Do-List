@@ -2,8 +2,7 @@
 
 import { newProject, updateSidebar, newToDo, show } from './updateDOM';
 import { Project } from './newProject';
-import { projects } from './index';
-import { localStore } from './local';
+import { localStore, projects } from './local';
 import { format } from "date-fns";
 import { ToDoItem } from './newToDo';
 

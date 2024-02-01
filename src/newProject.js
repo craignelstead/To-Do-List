@@ -2,7 +2,7 @@
 
 import { validate } from './validateInput';
 import { format } from "date-fns";
-import { localStore } from './local';
+import { localStore, projects } from './local';
 
 export const Project = (title, description, toDoItems, projectStatus, timeCreated) => {
 

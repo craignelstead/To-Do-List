@@ -1,10 +1,9 @@
 //Updates DOM for content
 
 import { validate } from './validateInput';
-import { projects, getTasks } from './index';
-import { ToDoItem } from './newToDo';
+import { ToDoItem, getTasks } from './newToDo';
 import { format } from "date-fns";
-import { localStore } from './local';
+import { localStore, projects } from './local';
 
 //New Project Form
 export const newProject = (function(doc) {
