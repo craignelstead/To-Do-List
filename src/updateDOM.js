@@ -453,7 +453,7 @@ export const updateSidebar = (function(doc) {
         const allLi = Array.from(doc.querySelectorAll('.projectLi'));
         allLi.forEach((li) => {
             let data = li.getAttribute('data-project');
-            if (data == proj.title) {
+            if (data === proj.title) {
                 li.remove();
             }
         });
@@ -475,10 +475,21 @@ export const updateSidebar = (function(doc) {
         });
     }
 
+    // function renamed () {
+    //     const allLi = Array.from(doc.querySelectorAll('.projectLi'));
+    //     allLi.forEach((li) => {
+    //         let data = li.getAttribute('data-project');
+    //         if (data === proj.title) {
+    //             li.remove();
+    //         }
+    //     });
+    // }
+
     return {
         addNewProject,
         removeProject,
         showCurrent,
+        //renamed,
     }
 })(document);
 

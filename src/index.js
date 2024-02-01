@@ -25,7 +25,8 @@ export const projects = (function() {
     function generateExistingProj (savedProj) {
 
         //Create new project based on one being stored
-        let projFromStorage = Project(savedProj.title, 
+        let projFromStorage = Project(
+            savedProj.title, 
             savedProj.description, 
             savedProj.toDoItems, 
             savedProj.projectStatus,

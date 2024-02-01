@@ -25,6 +25,7 @@ export const Project = (title, description, toDoItems, projectStatus, timeCreate
     //Adds task to project
     function addTodo(item) {
         toDoItems.push(item);
+        localStore.populateStorage();
     }
 
     //Remove a task from toDoItems

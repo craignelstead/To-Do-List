@@ -46,6 +46,9 @@ export const localStore = (function() {
     function setProjects() {
         //const savedProjects = JSON.parse(localStorage.getItem('storedProjects') || '[]');
         //projects.myProjects = savedProjects;
+        // window.addEventListener('storage', (e) => {
+
+        // });
         return JSON.parse(localStorage.getItem('storedProjects') || '[]');
     }
 
